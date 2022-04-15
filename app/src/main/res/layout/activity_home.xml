@@ -11,8 +11,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tollbar"
         android:layout_width="match_parent"
-        android:layout_height="84dp"
-        android:background="@color/purple_700"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -25,11 +24,11 @@
                 android:id="@+id/textView12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="10dp"
                 android:text="FILM"
                 android:textStyle="bold"
-                android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:textSize="21sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,8 +38,8 @@
                 android:layout_width="0dp"
                 android:layout_height="23dp"
                 android:text="username"
-                android:textColor="@color/white"
-                android:textSize="12sp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toStartOf="@+id/img_user"
                 app:layout_constraintHorizontal_bias="0.07"
                 app:layout_constraintStart_toStartOf="parent"
@@ -62,12 +61,11 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-
     <TextView
         android:id="@+id/tv_film"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="18dp"
         android:layout_marginTop="15dp"
         android:text="Daftar Film"
         android:textStyle="bold"
@@ -75,7 +73,6 @@
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tollbar" />
-
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefresh"

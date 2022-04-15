@@ -61,14 +61,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/edt_username"
-        android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="20dp"
-        android:padding="10dp"
+        android:background="@drawable/custom"
         android:hint="Masukkan Email"
+        android:padding="10dp"
         android:textColor="@color/black"
-        android:textSize="20dp"
-        android:background="@drawable/custom" />
+        android:textSize="20dp" />
 
     <EditText
         android:id="@+id/edt_password"
@@ -89,14 +89,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/edt_password"
-        android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="20dp"
-        android:padding="10dp"
+        android:background="@drawable/custom"
         android:hint="Masukkan Konfirmasi Password"
+        android:padding="10dp"
         android:textColor="@color/black"
-        android:textSize="20dp"
-        android:background="@drawable/custom" />
+        android:textSize="20dp" />
 
     <Button
         android:id="@+id/btn_register"
