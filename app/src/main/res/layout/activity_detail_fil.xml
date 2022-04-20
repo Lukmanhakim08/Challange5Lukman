@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetailFilActivity"
+    android:orientation="vertical"
+    android:layout_margin="10dp">
+
+    <TextView
+        android:id="@+id/text_detailjudu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:text="judul"
+        android:textColor="@color/black"
+        android:textSize="30dp" />
+
+    <ImageView
+        android:id="@+id/img_detail"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_below="@+id/text_detailjudu"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/ic_launcher_background" />
+
+    <TextView
+        android:id="@+id/text_detailtgl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/img_detail"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:text="tanggal film film"
+        android:textColor="@color/purple_700"
+        android:textSize="12dp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/detail_director"
+        android:layout_below="@+id/text_detailtgl"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="director"
+        android:textSize="17dp"
+        android:textColor="@color/black"/>
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update Data"
+        android:layout_above="@+id/tombol_hapus"
+        android:id="@+id/tombol_edit"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hapus Data"
+        android:id="@+id/tombol_hapus"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

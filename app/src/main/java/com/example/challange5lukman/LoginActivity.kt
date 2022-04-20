@@ -3,7 +3,6 @@ package com.example.challange5lukman
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.challange5lukman.Model.DataPenggunaItem
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
