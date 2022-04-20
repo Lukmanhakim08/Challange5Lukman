@@ -13,25 +13,24 @@
         android:theme="@style/Theme.Challange5Lukman">
         <activity
             android:name=".ProfileActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="profile"/>
         <activity
             android:name=".DetailFilActivity"
-            android:exported="false" />
-        <activity
-            android:name=".UpdateUserActivity"
-            android:exported="false" />
-        <activity
-            android:name=".DetailFilmActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="detail film"/>
         <activity
             android:name=".HomeActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Dashboard"/>
         <activity
             android:name=".RegisterActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="register"/>
         <activity
             android:name=".LoginActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="login"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">

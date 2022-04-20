@@ -25,6 +25,9 @@ class LoginActivity : AppCompatActivity() {
                 val email = et_email.text.toString()
                 val pass = et_password.text.toString()
                 setLogin(email, pass)
+                val pindah = Intent(this, HomeActivity::class.java)
+                pindah.putExtra("dataUser", setLogin(email, pass).toString())
+                startActivity(pindah)
                 finish()
             }else{
                 Toast.makeText(this, "Email dan Pasword wajib diisi", Toast.LENGTH_SHORT).show()
@@ -45,7 +48,7 @@ class LoginActivity : AppCompatActivity() {
                     response: Response<ResponseLogin>
                 ) {
                     if (response.isSuccessful){
-                        startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
+//                        startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
                         Toast.makeText(this@LoginActivity, "Login Sukses", Toast.LENGTH_SHORT).show()
                     }else{
                         Toast.makeText(this@LoginActivity, "Password atau Email Salah", Toast.LENGTH_SHORT).show()

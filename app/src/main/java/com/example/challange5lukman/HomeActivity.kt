@@ -13,6 +13,7 @@ import com.example.challange5lukman.Model.DatafilmResponseItem
 import com.example.challange5lukman.ViewModel.ViewModelFilm
 import kotlinx.android.synthetic.main.activity_detail_fil.*
 import kotlinx.android.synthetic.main.activity_home.*
+import mumtaz.binar.challangechapterlima.model.ResponseLogin
 import mumtaz.binar.challangechapterlima.model.Responseuser
 
 class HomeActivity : AppCompatActivity() {
@@ -22,7 +23,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        val datuser = intent.getParcelableExtra<Responseuser>("DataUser")
+        val datuser = intent.getParcelableExtra<Responseuser>("dataUser")
         Log.d("DataUser", datuser?.username.toString())
         txt_username.text = datuser?.username
 
