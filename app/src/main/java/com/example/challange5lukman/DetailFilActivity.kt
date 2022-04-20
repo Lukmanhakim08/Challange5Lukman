@@ -15,6 +15,7 @@ class DetailFilActivity : AppCompatActivity() {
         text_detailjudu.text = datafilm?.title
         text_detailtgl.text = datafilm?.releaseDate
         detail_director.text = datafilm?.director
+        text_sinopsi.text = datafilm?.synopsis
 
         Glide.with(applicationContext)
             .load(datafilm?.image)

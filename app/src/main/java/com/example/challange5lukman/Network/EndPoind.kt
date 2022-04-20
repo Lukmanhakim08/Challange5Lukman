@@ -2,6 +2,7 @@ package com.example.challange5lukman.Network
 
 import com.example.challange5lukman.Model.DatafilmResponseItem
 import com.example.challange5lukman.Model.ResponseRegister
+import mumtaz.binar.challangechapterlima.model.ResponseLogin
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -17,4 +18,12 @@ interface EndPoind {
         @Field ("email") email: String,
         @Field ("password") pasword: String,
     ): Call<ResponseRegister>
+
+    @POST("login.php")
+    @FormUrlEncoded
+    fun loginUser(
+        @Field("email") email: String,
+        @Field("password") password: String
+    ): Call<ResponseLogin>
+
 }

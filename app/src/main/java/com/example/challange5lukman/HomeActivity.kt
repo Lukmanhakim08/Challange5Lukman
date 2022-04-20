@@ -1,13 +1,19 @@
 package com.example.challange5lukman
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.challange5lukman.Adapter.Adapterfilm
+import com.example.challange5lukman.Model.DatafilmResponseItem
 import com.example.challange5lukman.ViewModel.ViewModelFilm
+import kotlinx.android.synthetic.main.activity_detail_fil.*
 import kotlinx.android.synthetic.main.activity_home.*
+import mumtaz.binar.challangechapterlima.model.Responseuser
 
 class HomeActivity : AppCompatActivity() {
 
@@ -15,16 +21,22 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-//        adapterFilm = Adapterfilm()
-//        rv_film.layoutManager = LinearLayoutManager(this)
-//        rv_film.adapter = adapterFilm
-        inirecyler()
-        getDataFilm()
-    }
 
+        val datuser = intent.getParcelableExtra<Responseuser>("DataUser")
+        Log.d("DataUser", datuser?.username.toString())
+        txt_username.text = datuser?.username
+
+        getDataFilm()
+        inirecyler()
+    }
+//
     fun inirecyler(){
         rv_film.layoutManager = LinearLayoutManager(this)
-        adapterFilm = Adapterfilm(){}
+        adapterFilm = Adapterfilm(){
+            val pindah = Intent(this, DetailFilActivity::class.java)
+            pindah.putExtra("DetailFilm", it)
+            startActivity(pindah)
+        }
         rv_film.adapter = adapterFilm
     }
 

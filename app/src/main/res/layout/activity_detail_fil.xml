@@ -50,19 +50,14 @@
         android:textSize="17dp"
         android:textColor="@color/black"/>
 
-
-    <Button
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/text_sinopsi"
+        android:layout_below="@+id/detail_director"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Update Data"
-        android:layout_above="@+id/tombol_hapus"
-        android:id="@+id/tombol_edit"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Hapus Data"
-        android:id="@+id/tombol_hapus"
-        android:layout_alignParentBottom="true"/>
+        android:text="Sinopsi"
+        android:textSize="12dp"
+        android:textColor="@color/black"/>
 
 </RelativeLayout>

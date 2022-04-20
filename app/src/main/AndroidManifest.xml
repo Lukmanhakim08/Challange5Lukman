@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Challange5Lukman">
         <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".DetailFilActivity"
             android:exported="false" />
         <activity
