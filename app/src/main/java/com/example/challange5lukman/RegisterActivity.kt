@@ -1,14 +1,13 @@
 package com.example.challange5lukman
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import com.example.challange5lukman.Model.ResponseRegister
-import com.example.challange5lukman.Network.ApiClient
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.example.challange5lukman.ViewModel.ViewModelRegister
 import kotlinx.android.synthetic.main.activity_register.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,10 +22,7 @@ class RegisterActivity : AppCompatActivity() {
                 if (edt_password.text.toString() != edt_konfirmasi.text.toString()){
                     Toast.makeText(this, "Password dan konfirmasi harus sama", Toast.LENGTH_SHORT).show()
                 }else{
-                    val username = edt_username.text.toString()
-                    val email = edt_email.text.toString()
-                    val password = edt_password.text.toString()
-                    registerP(username, email, password)
+                    postRegister()
                     finish()
                 }
 
@@ -36,24 +32,20 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    fun registerP(username: String, email: String, password: String){
-        ApiClient.instance.addRegister(username, email, password)
-            .enqueue(object : Callback<ResponseRegister>{
-                override fun onResponse(
-                    call: Call<ResponseRegister>,
-                    response: Response<ResponseRegister>
-                ) {
-                    if (response.isSuccessful){
-                        Toast.makeText(this@RegisterActivity, "register sukses", Toast.LENGTH_SHORT).show()
-                    }else{
-                        Toast.makeText(this@RegisterActivity, response.message(), Toast.LENGTH_SHORT).show()
-                    }
-                }
-
-                override fun onFailure(call: Call<ResponseRegister>, t: Throwable) {
-                    Toast.makeText(this@RegisterActivity, t.message, Toast.LENGTH_SHORT).show()
-                }
-            })
+    fun postRegister(){
+        val username = edt_username.text.toString()
+        val email = edt_email.text.toString()
+        val password = edt_password.text.toString()
+        val viewModel = ViewModelProvider(this).get(ViewModelRegister::class.java)
+        viewModel.getliveRegisterObserver().observe(this, Observer {
+            if (it != null){
+                Toast.makeText(this, "Register Sukses", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, LoginActivity::class.java))
+            }else{
+                Toast.makeText(this, "Username atau Password Salah", Toast.LENGTH_SHORT).show()
+            }
+        })
+        viewModel.RegisterApi(username, email, password)
     }
 
 }

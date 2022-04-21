@@ -5,18 +5,13 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.example.challange5lukman.Adapter.Adapterfilm
-import com.example.challange5lukman.Model.DatafilmResponseItem
+import com.example.challange5lukman.Model.Responseuser
 import com.example.challange5lukman.ViewModel.ViewModelFilm
-import kotlinx.android.synthetic.main.activity_detail_fil.*
 import kotlinx.android.synthetic.main.activity_home.*
-import mumtaz.binar.challangechapterlima.model.ResponseLogin
-import mumtaz.binar.challangechapterlima.model.Responseuser
 
 class HomeActivity : AppCompatActivity() {
 
@@ -25,10 +20,11 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        val detailUser = intent.getParcelableExtra<Responseuser>("DetailUser")
+        val detailUser = intent.getParcelableExtra<Responseuser>(LoginActivity.EXTRA_PERSON) as Responseuser
+        txt_username.text = detailUser.username
+
         img_user.setOnClickListener {
             val parsing = Intent(this, ProfileActivity::class.java)
-            parsing.putExtra("DetailUser", detailUser)
             startActivity(parsing)
         }
         sharedPreferences = getSharedPreferences("LOGIN", Context.MODE_PRIVATE)

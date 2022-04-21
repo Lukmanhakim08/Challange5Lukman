@@ -1,13 +1,12 @@
 package com.example.challange5lukman
 
-import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
+import com.example.challange5lukman.Model.Responseuser
 import kotlinx.android.synthetic.main.activity_profile.*
-import mumtaz.binar.challangechapterlima.model.Responseuser
 
 class ProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

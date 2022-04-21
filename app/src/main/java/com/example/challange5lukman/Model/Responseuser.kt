@@ -1,5 +1,4 @@
-package mumtaz.binar.challangechapterlima.model
-
+package com.example.challange5lukman.Model
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
@@ -7,6 +6,8 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Responseuser(
+    @SerializedName("id")
+    val id: String,
     @SerializedName("address")
     val address: String,
     @SerializedName("complete_name")
