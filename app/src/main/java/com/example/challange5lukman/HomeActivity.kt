@@ -1,6 +1,8 @@
 package com.example.challange5lukman
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -19,13 +21,17 @@ import mumtaz.binar.challangechapterlima.model.Responseuser
 class HomeActivity : AppCompatActivity() {
 
     lateinit var adapterFilm : Adapterfilm
+    lateinit var sharedPreferences: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-
-        val datuser = intent.getParcelableExtra<Responseuser>("dataUser")
-        Log.d("DataUser", datuser?.username.toString())
-        txt_username.text = datuser?.username
+        val detailUser = intent.getParcelableExtra<Responseuser>("DetailUser")
+        img_user.setOnClickListener {
+            val parsing = Intent(this, ProfileActivity::class.java)
+            parsing.putExtra("DetailUser", detailUser)
+            startActivity(parsing)
+        }
+        sharedPreferences = getSharedPreferences("LOGIN", Context.MODE_PRIVATE)
 
         getDataFilm()
         inirecyler()
