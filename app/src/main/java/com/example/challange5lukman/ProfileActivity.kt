@@ -49,8 +49,12 @@ class ProfileActivity : AppCompatActivity() {
                .setMessage("yakin Mw Logout ....? ")
                .setCancelable(false)
                .setPositiveButton("Ya"){ dialogInterface: DialogInterface, i: Int ->
-                   Toast.makeText(this, "Logout Berhasil", Toast.LENGTH_SHORT).show()
+                   pref = getSharedPreferences("datauser", Context.MODE_PRIVATE)
+                   val logout = pref.edit()
+                   logout.clear()
+                   logout.apply()
                    startActivity(Intent(this, LoginActivity::class.java))
+                   finish()
                }
                .setNegativeButton("Tidak"){ dialogInterface: DialogInterface, i: Int ->
                    Toast.makeText(this,"Tidak jadi di logout", Toast.LENGTH_LONG).show()
