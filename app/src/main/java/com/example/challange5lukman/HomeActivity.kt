@@ -20,23 +20,14 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        sf = this.getSharedPreferences("LOGIN", Context.MODE_PRIVATE)
 
-        val email = sf.getString("EMAIL","")
-        txt_username.text = email
+//        sf = this.getSharedPreferences("datauser", Context.MODE_PRIVATE)
+
+        sf = getSharedPreferences("datauser", Context.MODE_PRIVATE)
+        txt_username.text = "Username, " + sf.getString("email", "")
 
         img_user.setOnClickListener {
-            sf = this.getSharedPreferences("DETAIL", Context.MODE_PRIVATE)
-            val preft = sf.edit()
-            preft.putString("ID",email )
-            preft.putString("USERNAME",email )
-            preft.putString("NAMALENGKAP",email )
-            preft.putString("TGLLAHIR",email )
-            preft.putString("ALAMAT",email )
-            preft.apply()
-            val detail = Intent(this, ProfileActivity::class.java)
-            detail.putExtra("DETAIL_USER", email)
-            startActivity(detail)
+            startActivity(Intent(this, ProfileActivity::class.java))
         }
 
         getDataFilm()

@@ -24,14 +24,17 @@ interface EndPoind {
         @Field("password") password: String
     ): Call<Responseuser>
 
+    @GET("apiuser.php")
+    fun allUser(): Call<List<Responseuser>>
+
     @POST("updateUser.php")
     @FormUrlEncoded
     fun updateUser(
-        @Field("id") id: String,
-        @Field("complete_name") complete_name: String,
-        @Field("username") username: String,
+        @Field("id") id: Int,
         @Field("address") address: String,
-        @Field("dateofbirth") dateofbirth: String
+        @Field("complete_name") complete_name: String,
+        @Field("dateofbirth") dateofbirth: String,
+        @Field("username") username: String
     ): Call<Responseuser>
 
     @POST("detailuser.php")

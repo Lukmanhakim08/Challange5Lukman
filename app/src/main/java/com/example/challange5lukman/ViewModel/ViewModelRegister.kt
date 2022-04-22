@@ -13,16 +13,22 @@ import retrofit2.Response
 class ViewModelRegister : ViewModel(){
     lateinit var liveRegister : MutableLiveData<ResponseRegister?>
     lateinit var liveDataLogin : MutableLiveData<Responseuser?>
+    lateinit var liveDataLoginBr : MutableLiveData<List<Responseuser>?>
     lateinit var liveDataDetail : MutableLiveData<List<Detailuser>?>
 
     init {
         liveRegister = MutableLiveData()
         liveDataLogin = MutableLiveData()
+        liveDataLoginBr = MutableLiveData()
         liveDataDetail = MutableLiveData()
     }
 
     fun getliveRegisterObserver() : MutableLiveData<ResponseRegister?> {
         return liveRegister
+    }
+
+    fun getLiveLogin() : MutableLiveData<List<Responseuser>?> {
+        return liveDataLoginBr
     }
 
     fun getLiveLoginObserver() : MutableLiveData<Responseuser?>{
@@ -53,28 +59,49 @@ class ViewModelRegister : ViewModel(){
             })
     }
 
-    fun LoginApi(email: String, password: String){
-        ApiClient.instance.loginUser(email, password)
-            .enqueue(object : Callback<Responseuser>{
+    fun PostLoginUser(){
+        ApiClient.instance.allUser()
+            .enqueue(object : Callback<List<Responseuser>>{
                 override fun onResponse(
-                    call: Call<Responseuser>,
-                    response: Response<Responseuser>
+                    call: Call<List<Responseuser>>,
+                    response: Response<List<Responseuser>>
                 ) {
                     if (response.isSuccessful){
-                        liveDataLogin.postValue(response.body())
+                        liveDataLoginBr.postValue(response.body())
                     }else{
-                        liveDataLogin.postValue(null)
+                        liveDataLoginBr.postValue(null)
                     }
                 }
 
-                override fun onFailure(call: Call<Responseuser>, t: Throwable) {
-                    liveDataLogin.postValue(null)
+                override fun onFailure(call: Call<List<Responseuser>>, t: Throwable) {
+                    liveDataLoginBr.postValue(null)
                 }
 
             })
     }
 
-    fun UpdteUserApi(id: String, complete_name: String, username: String, address: String, dateofbirth: String){
+//    fun LoginApi(email: String, password: String){
+//        ApiClient.instance.loginUser(email, password)
+//            .enqueue(object : Callback<Responseuser>{
+//                override fun onResponse(
+//                    call: Call<Responseuser>,
+//                    response: Response<Responseuser>
+//                ) {
+//                    if (response.isSuccessful){
+//                        liveDataLogin.postValue(response.body())
+//                    }else{
+//                        liveDataLogin.postValue(null)
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<Responseuser>, t: Throwable) {
+//                    liveDataLogin.postValue(null)
+//                }
+//
+//            })
+//    }
+
+    fun UpdteUserApi(id: Int, complete_name: String, username: String, address: String, dateofbirth: String){
         ApiClient.instance.updateUser(id, complete_name, username, address, dateofbirth)
             .enqueue(object : Callback<Responseuser>{
                 override fun onResponse(
