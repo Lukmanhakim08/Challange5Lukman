@@ -60,7 +60,7 @@
         android:textSize="20dp" />
 
     <EditText
-        android:id="@+id/edt_email"
+        android:id="@+id/edt_alamat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/edt_usnameprofl"
@@ -68,16 +68,16 @@
         android:layout_marginTop="5dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/custom"
-        android:hint="Email"
+        android:hint="tanggal lahir"
         android:padding="10dp"
         android:textColor="@color/black"
         android:textSize="20dp" />
 
     <EditText
-        android:id="@+id/edt_alamat"
+        android:id="@+id/edt_tgllahir"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/edt_email"
+        android:layout_below="@+id/edt_alamat"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="20dp"
@@ -93,7 +93,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/btn_logout"
-        android:text="Update Data"/>
+        android:text="Update Data" />
 
     <Button
         android:id="@+id/btn_logout"

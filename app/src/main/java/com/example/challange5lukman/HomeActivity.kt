@@ -9,25 +9,35 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.challange5lukman.Adapter.Adapterfilm
-import com.example.challange5lukman.Model.Responseuser
 import com.example.challange5lukman.ViewModel.ViewModelFilm
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
 
     lateinit var adapterFilm : Adapterfilm
-    lateinit var sharedPreferences: SharedPreferences
+    lateinit var sf: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        val detailUser = intent.getParcelableExtra<Responseuser>(LoginActivity.EXTRA_PERSON) as Responseuser
-        txt_username.text = detailUser.username
+        sf = this.getSharedPreferences("LOGIN", Context.MODE_PRIVATE)
+
+        val email = sf.getString("EMAIL","")
+        txt_username.text = email
 
         img_user.setOnClickListener {
-            val parsing = Intent(this, ProfileActivity::class.java)
-            startActivity(parsing)
+            sf = this.getSharedPreferences("DETAIL", Context.MODE_PRIVATE)
+            val preft = sf.edit()
+            preft.putString("ID",email )
+            preft.putString("USERNAME",email )
+            preft.putString("NAMALENGKAP",email )
+            preft.putString("TGLLAHIR",email )
+            preft.putString("ALAMAT",email )
+            preft.apply()
+            val detail = Intent(this, ProfileActivity::class.java)
+            detail.putExtra("DETAIL_USER", email)
+            startActivity(detail)
         }
-        sharedPreferences = getSharedPreferences("LOGIN", Context.MODE_PRIVATE)
 
         getDataFilm()
         inirecyler()
@@ -56,10 +66,15 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        sf = this.getSharedPreferences("LOGIN", Context.MODE_PRIVATE)
         getDataFilm()
+
+        val username = sf.getString("EMAIL", "")
+        txt_username.text = username
     }
 
     override fun onDestroy() {
         super.onDestroy()
     }
+
 }

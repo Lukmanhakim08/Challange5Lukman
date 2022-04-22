@@ -1,35 +1,44 @@
 package com.example.challange5lukman
 
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.challange5lukman.Model.ResponseLogin
 import com.example.challange5lukman.Model.Responseuser
 import com.example.challange5lukman.Network.ApiClient
+import com.example.challange5lukman.ViewModel.ViewModelRegister
 import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
-    private lateinit var sharedPreferences: SharedPreferences
+    lateinit var sharedPreferences: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        val datauser = getSharedPreferences("LOGIN", Context.MODE_PRIVATE)
+//        if(datauser.contains("EMAIL")){
+//            startActivity(Intent(this, HomeActivity::class.java))
+//        }
+
+        sharedPreferences = this.getSharedPreferences("LOGIN", Context.MODE_PRIVATE)
+
         btn_login.setOnClickListener {
-            if (et_email.text.isNotEmpty() &&
-                et_password.text.isNotEmpty() ){
-                val email = et_email.text.toString()
-                val pass = et_password.text.toString()
-                setLogin(email, pass)
-                finish()
-            }else{
-                Toast.makeText(this, "Email dan Pasword wajib diisi", Toast.LENGTH_SHORT).show()
-            }
+           if (et_email.text.toString().isEmpty()){
+               et_email.setError("Isi email")
+           }else if (et_password.text.toString().isEmpty()){
+               et_password.setError("Isi Password")
+           }else{
+               doLogin()
+           }
 
         }
 
@@ -38,36 +47,29 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun setLogin(email: String, password: String){
-        ApiClient.instance.loginUser(email, password)
-            .enqueue(object : Callback<ResponseLogin>{
-                override fun onResponse(
-                    call: Call<ResponseLogin>,
-                    response: Response<ResponseLogin>
-                ) {
-                    if (response.isSuccessful){
-                        val login = response.body()?.responseuser?.username?.let {
-                            Responseuser(
-                                "", "", "", "", "", "", it
-                            )
-                        }
-                        val intent = Intent(this@LoginActivity, HomeActivity::class.java)
-                        intent.putExtra(EXTRA_PERSON, login)
-                        startActivity(intent)
-                        Toast.makeText(this@LoginActivity, "Login Suksess", Toast.LENGTH_SHORT).show()
-                    }else{
-                        Toast.makeText(this@LoginActivity, "Password atau Email Salah", Toast.LENGTH_SHORT).show()
-                    }
-                }
+    fun doLogin(){
+        val email = et_email.text.toString()
+        val pass = et_password.text.toString()
+        val viewmodel = ViewModelProvider(this).get(ViewModelRegister::class.java)
+        viewmodel.getLiveLoginObserver().observe(this, Observer {
+            if (it != null){
+                val preft = sharedPreferences.edit()
+                preft.putString("id", it.id)
+                preft.putString("ID", it.id)
+                preft.putString("NMLENGKAP", it.completeName)
+                preft.putString("USERNAME", it.username)
+                preft.putString("TGL", it.dateofbirth)
+                preft.putString("ALAMAT", it.address)
+                preft.putString("EMAIL", email)
+                preft.apply()
 
-                override fun onFailure(call: Call<ResponseLogin>, t: Throwable) {
-                    Toast.makeText(this@LoginActivity, "Login gagal", Toast.LENGTH_SHORT).show()
-                }
-
-            })
+                Toast.makeText(this, "Login berhasil", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, HomeActivity::class.java))
+            }else{
+                Toast.makeText(this, "email dan password salah", Toast.LENGTH_SHORT).show()
+            }
+        })
+        viewmodel.LoginApi(email, pass)
     }
 
-    companion object {
-        const val EXTRA_PERSON = "extra_person"
-    }
 }
